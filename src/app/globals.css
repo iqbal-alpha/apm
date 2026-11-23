@@ -1,0 +1,250 @@
+@import '@xyflow/react/dist/style.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Carbon Surfaces */
+  --bg-ground: #06080D;
+  --bg-surface: #0B0F17;
+  --bg-raised: #111824;
+  --bg-floating: #172030;
+
+  /* Hairline Borders */
+  --border-subtle: #1B2436;
+  --border-default: #243047;
+  --border-focus: #566B8C;
+
+  /* Ink Hierarchy */
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #8B9BB4;
+
+  /* Telemetry & Health Polarity */
+  --healthy: #10B981;
+  --healthy-bright: #34D399;
+  --healthy-tint: rgba(16, 185, 129, 0.12);
+  --healthy-glow: 0 0 22px -4px rgba(16, 185, 129, 0.24);
+
+  --telemetry: #0EA5E9;
+  --telemetry-bright: #38BDF8;
+  --telemetry-tint: rgba(14, 165, 233, 0.12);
+  --telemetry-glow: 0 0 20px -4px rgba(14, 165, 233, 0.24);
+
+  --warn: #F59E0B;
+  --warn-bright: #FBBF24;
+  --warn-tint: rgba(245, 158, 11, 0.14);
+  --warn-glow: 0 0 22px -4px rgba(245, 158, 11, 0.24);
+
+  --critical: #EF4444;
+  --critical-bright: #F87171;
+  --critical-tint: rgba(239, 68, 68, 0.15);
+  --critical-flash: rgba(239, 68, 68, 0.26);
+  --critical-glow: 0 0 28px -4px rgba(239, 68, 68, 0.30);
+
+  --itsm: #F97316;
+  --itsm-bright: #FB923C;
+  --itsm-tint: rgba(249, 115, 22, 0.12);
+
+  /* Tight Engineering Geometry */
+  --radius-panel: 8px;
+  --radius-node: 10px;
+  --radius-control: 6px;
+  --radius-pill: 4px;
+
+  /* Motion Timing Tokens */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-flash: 200ms;
+  --t-ui: 220ms;
+  --t-drawer: 340ms;
+
+  /* Typography Stacks */
+  --font-sans: var(--font-instrument-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-spline-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  background-color: var(--bg-ground);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+.tabular-nums-strict {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Custom thin carbon scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-ground);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-focus);
+}
+
+/* React Flow Dark Carbon Overrides */
+.react-flow__attribution {
+  display: none !important;
+}
+
+.react-flow__pane {
+  cursor: grab;
+}
+
+.react-flow__pane:active {
+  cursor: grabbing;
+}
+
+.react-flow__controls {
+  box-shadow: none !important;
+}
+
+/* 12 Functional AIOps Motion Keyframes */
+@keyframes flow-dash {
+  from {
+    stroke-dashoffset: 32;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-flow-healthy {
+  animation: flow-dash 1.2s linear infinite;
+}
+
+.animate-flow-degraded {
+  animation: flow-dash 2.4s linear infinite;
+}
+
+.animate-flow-critical {
+  animation: flow-dash 0.65s linear infinite;
+}
+
+@keyframes critical-radar {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.45), var(--critical-glow);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0), var(--critical-glow);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0), var(--critical-glow);
+  }
+}
+
+.node-critical-pulse {
+  animation: critical-radar 2s var(--ease-out) infinite;
+}
+
+@keyframes sla-urgency-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 14px 1px rgba(239, 68, 68, 0.28);
+  }
+}
+
+.sla-pulse {
+  animation: sla-urgency-pulse 2.4s var(--ease-out) infinite;
+}
+
+@keyframes threshold-flash {
+  0% {
+    background-color: var(--critical-flash);
+    color: var(--critical-bright);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.metric-flash-critical {
+  animation: threshold-flash 220ms var(--ease-out);
+}
+
+@keyframes mitigation-sweep {
+  0% {
+    box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.6), 0 0 22px -2px rgba(16, 185, 129, 0.35);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(16, 185, 129, 0), var(--healthy-glow);
+  }
+}
+
+.mitigation-sweep-active {
+  animation: mitigation-sweep 600ms var(--ease-out);
+}
+
+@keyframes bridge-dispatch {
+  0% {
+    transform: translateX(-8px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-bridge-dispatch {
+  animation: bridge-dispatch 550ms var(--ease-expo);
+}
+
+@keyframes log-row-arrival {
+  0% {
+    background-color: rgba(239, 68, 68, 0.14);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.log-arrival-flash {
+  animation: log-row-arrival 400ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-flow-healthy,
+  .animate-flow-degraded,
+  .animate-flow-critical,
+  .node-critical-pulse,
+  .sla-pulse,
+  .metric-flash-critical,
+  .mitigation-sweep-active,
+  .animate-bridge-dispatch,
+  .log-arrival-flash {
+    animation: none !important;
+  }
+}
