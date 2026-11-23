@@ -17,10 +17,12 @@ const splineSansMono = Spline_Sans_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://apm.iqbalfa.my.id'),
   title: 'SENTINEL: AIOps Monitoring & Auto-Incident Platform',
   description:
     'Autonomous service dependency observability, cascading fault injection, 120-second time-travel replay, and automated Dynatrace-to-BMC Helix P1 incident orchestration.',
   openGraph: {
+    url: 'https://apm.iqbalfa.my.id/',
     title: 'SENTINEL: AIOps Monitoring & Auto-Incident Platform',
     description:
       'Autonomous service dependency observability, cascading fault injection, 120-second time-travel replay, and automated Dynatrace-to-BMC Helix P1 incident orchestration.',
